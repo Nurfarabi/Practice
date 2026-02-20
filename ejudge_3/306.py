@@ -1,0 +1,15 @@
+class Shape:
+    def area(self):
+        return 0
+    
+class Rectangle(Shape):
+    def __init__(self, length, width):
+        self.length = length
+        self.width = width
+
+    def area(self):
+        return self.length * self.width
+    
+n, m = map(int, input().split())
+obg = Rectangle(n, m)
+print(obg.area())
