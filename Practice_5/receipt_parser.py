@@ -22,7 +22,7 @@ payment_method = payment.group() if payment else None
 
 data = {
     "Products" : products,
-    "Prices" : prices,
+    "Prices" : prices_float,
     "Datetime" : datetime,
     "Payment Method" : payment_method
 }
