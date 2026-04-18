@@ -5,28 +5,31 @@ import os
 pygame.init()
 pygame.mixer.init()
 
-W = 500
-H = 400
-clock = pygame.time.Clock()
+W, H = 600, 450
 screen = pygame.display.set_mode((W, H))
 pygame.display.set_caption("KBTU Music Player")
+clock = pygame.time.Clock()
 
-font = pygame.font.SysFont("Arial", 22, bold=True)
+font = pygame.font.SysFont("Arial", 26, bold=True)
 small_font = pygame.font.SysFont("Arial", 18)
 
-
-BG_COLOR = (30, 33, 39)
-BTN_COLOR = (97, 175, 239)
-TEXT_COLOR = (255, 255, 255)
-ACCENT_COLOR = (152, 195, 121)
+# Colors
+BG = (20, 22, 26)
+CARD = (35, 38, 45)
+BTN = (97, 175, 239)
+BTN_HOVER = (120, 190, 255)
+TEXT = (240, 240, 240)
+ACCENT = (152, 195, 121)
+RED = (224, 108, 117)
 
 songs = [
+    "music/Skillet - The Resistance.mp3",
     "music/giragira.mp3",
-    "music/Skillet - The Resistance.mp3"
 ]
 
 current_track_index = 0
 is_playing = False
+
 
 def play_song(index):
     global is_playing, current_track_index
@@ -36,72 +39,87 @@ def play_song(index):
         current_track_index = index
         is_playing = True
     except pygame.error as e:
-        print(f"Ошибка загрузки: {e}")
+        print(e)
 
-def stop_song():
-    global is_playing
-    pygame.mixer.music.stop()
-    is_playing = False
 
 def next_song():
     global current_track_index
     current_track_index = (current_track_index + 1) % len(songs)
     play_song(current_track_index)
 
+
 def prev_song():
     global current_track_index
     current_track_index = (current_track_index - 1) % len(songs)
     play_song(current_track_index)
 
+
+def draw_button(rect, text, mouse):
+    color = BTN_HOVER if rect.collidepoint(mouse) else BTN
+    pygame.draw.rect(screen, color, rect, border_radius=10)
+
+    txt = small_font.render(text, True, TEXT)
+    screen.blit(txt, txt.get_rect(center=rect.center))
+
+
 running = True
 while running:
+    mouse = pygame.mouse.get_pos()
+
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
-        
-        if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_p:
+
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            if play_btn.collidepoint(mouse):
                 if not is_playing:
                     play_song(current_track_index)
                 else:
                     pygame.mixer.music.unpause()
-            elif event.key == pygame.K_s:
 
+            if pause_btn.collidepoint(mouse):
                 pygame.mixer.music.pause()
-                is_playing = False
-            elif event.key == pygame.K_n:
+
+            if next_btn.collidepoint(mouse):
                 next_song()
-            elif event.key == pygame.K_b:
+
+            if prev_btn.collidepoint(mouse):
                 prev_song()
-            elif event.key == pygame.K_q:
-                running = False
 
-    screen.fill(BG_COLOR)
+    screen.fill(BG)
+
+    # Card
+    card_rect = pygame.Rect(50, 50, 500, 300)
+    pygame.draw.rect(screen, CARD, card_rect, border_radius=20)
+
+    # Track info
     track_name = os.path.basename(songs[current_track_index])
-    status = "Playing" if is_playing else "Paused/Stopped"
-    
-    title_surface = font.render(f"Track: {track_name}", True, BTN_COLOR)
-    status_surface = small_font.render(f"Status: {status}", True, ACCENT_COLOR if is_playing else (200, 100, 100))
-    
-    screen.blit(title_surface, (50, 50))
-    screen.blit(status_surface, (50, 90))
+    status = "Playing" if is_playing else "Paused"
 
-    controls = [
-        "P - Play/Unpause",
-        "S - Stop (Pause)",
-        "N - Next Track",
-        "B - Previous Track",
-        "Q - Quit"
-    ]
-    
-    for i, text in enumerate(controls):
-        ctrl_surf = small_font.render(text, True, (150, 150, 150))
-        screen.blit(ctrl_surf, (50, 150 + (i * 30)))
+    title = font.render(track_name, True, BTN)
+    status_text = small_font.render(
+        status, True, ACCENT if is_playing else RED
+    )
 
-    pygame.draw.rect(screen, (60, 60, 60), (50, 330, 400, 10))
+    screen.blit(title, title.get_rect(center=(W // 2, 120)))
+    screen.blit(status_text, status_text.get_rect(center=(W // 2, 160)))
+
+    # Buttons
+    play_btn = pygame.Rect(200, 220, 80, 40)
+    pause_btn = pygame.Rect(300, 220, 80, 40)
+    prev_btn = pygame.Rect(120, 220, 60, 40)
+    next_btn = pygame.Rect(400, 220, 60, 40)
+
+    draw_button(play_btn, "Play", mouse)
+    draw_button(pause_btn, "Pause", mouse)
+    draw_button(prev_btn, "<<", mouse)
+    draw_button(next_btn, ">>", mouse)
+
+    # Progress bar
+    pygame.draw.rect(screen, (60, 60, 60), (120, 280, 360, 8), border_radius=5)
     if is_playing:
-        pos = (pygame.time.get_ticks() // 50) % 400
-        pygame.draw.rect(screen, BTN_COLOR, (50, 330, pos, 10))
+        pos = (pygame.time.get_ticks() // 30) % 360
+        pygame.draw.rect(screen, BTN, (120, 280, pos, 8), border_radius=5)
 
     pygame.display.flip()
     clock.tick(60)
