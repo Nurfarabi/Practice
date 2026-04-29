@@ -1,0 +1,114 @@
+[
+  {
+    "username": "dhgfg",
+    "email": null,
+    "birthday": null,
+    "group": null,
+    "phones": [
+      {
+        "phone": "4875684",
+        "type": "work"
+      }
+    ]
+  },
+  {
+    "username": "Dmitry",
+    "email": "d.ivanov@tech.kz",
+    "birthday": "1989-01-12",
+    "group": "Work",
+    "phones": [
+      {
+        "phone": "+777544332",
+        "type": "work"
+      }
+    ]
+  },
+  {
+    "username": "Elena",
+    "email": "elena.hr@corp.uk",
+    "birthday": "1985-04-18",
+    "group": "Work",
+    "phones": [
+      {
+        "phone": "+442071234",
+        "type": "work"
+      }
+    ]
+  },
+  {
+    "username": "fg",
+    "email": null,
+    "birthday": null,
+    "group": null,
+    "phones": [
+      {
+        "phone": "4545",
+        "type": "mobile"
+      }
+    ]
+  },
+  {
+    "username": "hgjgfg",
+    "email": null,
+    "birthday": null,
+    "group": null,
+    "phones": [
+      {
+        "phone": "748",
+        "type": "mobile"
+      }
+    ]
+  },
+  {
+    "username": "Jasmine",
+    "email": "jazzy.j@live.com",
+    "birthday": null,
+    "group": "Other",
+    "phones": [
+      {
+        "phone": "+971505551",
+        "type": "mobile"
+      }
+    ]
+  },
+  {
+    "username": "joss",
+    "email": null,
+    "birthday": null,
+    "group": "Family",
+    "phones": [
+      {
+        "phone": "485745",
+        "type": "home"
+      },
+      {
+        "phone": "843578",
+        "type": "work"
+      }
+    ]
+  },
+  {
+    "username": "Marcus",
+    "email": "m.smith@icloud.com",
+    "birthday": "1993-07-25",
+    "group": "Family",
+    "phones": [
+      {
+        "phone": "+155501022",
+        "type": "home"
+      }
+    ]
+  },
+  {
+    "username": "Sanzhar",
+    "email": "sanzh.v@gmail.com",
+    "birthday": "1992-11-03",
+    "group": "Friend",
+    "phones": [
+      {
+        "phone": "+770199988",
+        "type": "mobile"
+      }
+    ]
+  }
+]
