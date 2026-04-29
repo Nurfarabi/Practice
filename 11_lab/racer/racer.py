@@ -132,7 +132,7 @@ class Coin(pygame.sprite.Sprite):
                 0
             )
 
-# Objects
+
 P1 = Player()
 E1 = Enemy()
 
@@ -153,7 +153,7 @@ all_sprites.add(E1)
 for c in coins:
     all_sprites.add(c)
 
-# Events 
+
 INC_SPEED = pygame.USEREVENT + 1
 pygame.time.set_timer(INC_SPEED, 1000)
 
@@ -181,7 +181,7 @@ while True:
     
     DISPLAYSURF.blit(background, (0, 0))
 
-    # Ui
+  
     score_text = font_small.render(f"Score: {SCORE}", True, BLACK)
     DISPLAYSURF.blit(score_text, (10, 10))
 

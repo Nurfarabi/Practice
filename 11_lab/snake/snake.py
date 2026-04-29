@@ -50,7 +50,7 @@ speed = 10
 running = True
 while running:
 
-    #Events 
+   
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             pygame.quit()
@@ -91,7 +91,7 @@ while running:
     else:
         snake.pop()
 
-    #
+    
     if pygame.time.get_ticks() - food_timer > FOOD_LIFETIME:
         food = spawn_food()
         food_timer = pygame.time.get_ticks()
@@ -126,7 +126,6 @@ while running:
 
     pygame.draw.rect(screen, food_color, (fx, fy, BLOCK, BLOCK))
 
-    # UI 
     score_text = font.render(f"Score: {score}", True, WHITE)
     level_text = font.render(f"Level: {level}", True, WHITE)
 

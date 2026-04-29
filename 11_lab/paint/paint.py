@@ -26,7 +26,7 @@ start_pos = (0,0)
 
 screen.fill(WHITE)
 
-# Main Loop 
+ 
 while True:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
